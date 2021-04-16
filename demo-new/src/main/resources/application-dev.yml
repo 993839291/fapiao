@@ -1,0 +1,43 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000      # 最大并发数
+    max-connections: 20000 # 最大连接数
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:            #应用配置，用于配置当前应用信息，不管该应用是提供者还是消费者。 #dubbo.application.qosEnable=false
+    name: letssell-consumer
+  datasource:         # 数据库连接
+    username: root
+    password: guodong123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/fapiao?generateSimpleParameterMetadata=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    hikari:
+      connection-init-sql: SET NAMES utf8mb4
+      minimum-idle: 20          # 最小空闲连接数量
+      idle-timeout: 600000      # 空闲连接存活最大时间，默认600000（10分钟）
+      maximum-pool-size: 500    # 指定连接池最大的连接数，包括使用中的和空闲的连接
+      max-lifetime: 1800000     # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      connection-timeout: 30000 # 数据库连接超时时间,默认30秒，即30000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  devtools:
+    restart:
+      enabled: false #热部署生效
+
+
+
+
+mybatis:
+  type-aliases-package: com.example.demonew.model      #实体类所做包
+  mapper-locations: classpath*:mapper/*.xml,classpath*:mapper/**/*.xml    #mapper.xml所在位置
+  #configLocation: classpath:mybatis.xml      #MyBatis相关自定义配置
+
+
